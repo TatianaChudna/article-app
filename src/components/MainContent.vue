@@ -27,7 +27,7 @@
         <option :value="3">New first</option>
         <option :value="4">Old first</option>
       </select>
-      <div  class="checkbox">
+      <div class="checkbox">
         <input
             id="input-check"
             type="checkbox"
@@ -49,6 +49,7 @@
 <script>
 import ArticleList from "@/components/ArticleList.vue";
 import axios from "axios";
+
 const sortByAlphabet = 2;
 const sortByDataEsc = 3;
 const sortByDataDesc = 4;
@@ -71,15 +72,7 @@ export default {
   },
 
   mounted() {
-    axios.get('/api.json')
-        .then(resp => {
-          this.articleList = resp.data.payload.data;
-        })
-        .catch(err => {
-          console.log(err)
-        })
-        .finally(() => {
-        });
+    this.getArticles();
   },
 
   computed: {
@@ -133,7 +126,19 @@ export default {
     },
   },
 
-  methods: {}
+  methods: {
+   async getArticles() {
+      await axios.get('/api.json')
+          .then(resp => {
+            this.articleList = resp.data.payload.data;
+          })
+          .catch(err => {
+            console.log(err)
+          })
+          .finally(() => {
+          });
+    }
+  }
 }
 </script>
 
