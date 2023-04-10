@@ -1,19 +1,36 @@
 <template>
-<div class="article-size">
-  <div class="image" :style="{ backgroundImage: `url(${article.images[0].landscape[1]})` }"></div>
+<div class="article">
+  <div
+      class="image"
+      :style="{ backgroundImage: `url(${article.images[0].landscape[1]})` }"
+  >
+  </div>
   <div class="info">
     <div class="avatar-container">
-      <div class="avatar"><span>{{ avatarName }}</span></div>
+      <div class="avatar">
+        <span>{{ avatarName }}</span>
+      </div>
       <div>
-        <p class="author"><b>{{article.author}}</b></p>
+        <p class="author">
+          <b>{{article.author}}</b>
+        </p>
         <p class="date">{{this.newDateFormat}}</p>
       </div>
     </div>
     <h3 class="title">{{ article.title }}</h3>
     <div class="like-box">
-      <button class="like-button" :class="[checked ? activeClass : notActiveClass]" @click="likeFunction">Like</button>
+      <button
+          class="like-button"
+          :class="[checked ? activeClass : notActiveClass]"
+          @click="likeFunction"
+      >
+        Like
+      </button>
       <div class="like-container">
-        <img src="../assets/heart-icon.svg" alt="heart-icon">
+        <img
+            src="../assets/heart-icon.svg"
+            alt="heart-icon"
+        >
         <span class="like">{{ countLikes }} likes</span>
       </div>
     </div>
@@ -61,7 +78,7 @@ export default {
 </script>
 
 <style scoped>
-.article-size {
+.article {
   height: 300px;
   background: #FFF;
   border-radius: 6px;

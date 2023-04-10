@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import MainHeader from "@/components/MainHeader.vue";
-import MainContent from "@/components/MainContent.vue";
+import MainHeader from '@/components/MainHeader.vue';
+import MainContent from '@/components/MainContent.vue';
 
 export default {
   name: 'MainPage',
@@ -13,8 +13,6 @@ export default {
     MainContent,
     MainHeader,
   },
-  props: {
-  }
 }
 </script>
 

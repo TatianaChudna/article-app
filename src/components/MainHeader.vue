@@ -9,8 +9,6 @@
 <script>
 export default {
   name: 'MainHeader',
-  props: {
-  }
 }
 </script>
 

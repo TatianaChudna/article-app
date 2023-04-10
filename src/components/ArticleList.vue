@@ -3,9 +3,7 @@
       v-for="article in articleList"
       :key="article.id"
   >
-    <ArticleItem
-        :article="article"
-    />
+    <ArticleItem :article="article" />
   </div>
 </template>
 

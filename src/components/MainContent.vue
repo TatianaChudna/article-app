@@ -3,7 +3,10 @@
   <div class="content">
     <div class="toolbar">
       <span class="filter">
-        <img src="../assets/search-icon.svg" alt="search-icon">
+        <img
+            src="../assets/search-icon.svg"
+            alt="search-icon"
+        >
         <input
             v-model="searchValue"
             type="text"
@@ -24,8 +27,8 @@
           All Results
         </option>
         <option :value="2">By alphabet</option>
-        <option :value="3">New first</option>
-        <option :value="4">Old first</option>
+        <option :value="3">New to old</option>
+        <option :value="4">Old to new</option>
       </select>
       <div class="checkbox">
         <input
@@ -47,19 +50,17 @@
 </template>
 
 <script>
-import ArticleList from "@/components/ArticleList.vue";
-import axios from "axios";
+import ArticleList from '@/components/ArticleList.vue';
+import axios from 'axios';
 
 const sortByAlphabet = 2;
-const sortByDataEsc = 3;
-const sortByDataDesc = 4;
+const sortByDateDesc = 3;
+const sortByDateAsc = 4;
 
 export default {
   name: 'MainContent',
   components: {
     ArticleList,
-  },
-  props: {
   },
 
   data() {
@@ -78,9 +79,10 @@ export default {
   computed: {
     filterArticles() {
       let result = this.articleList
+
       if (this.checked) {
         result = this.articleList.filter((item) => {
-          return item.dateAdded >= '2022-01-01';
+          return item.dateAdded >= '2022-01-01'; // It works for 2022, because in our dataset haven't 2023
         })
       }
 
@@ -111,12 +113,12 @@ export default {
             }
           })
           break;
-        case sortByDataEsc:
+        case sortByDateDesc:
           sortedArticles.sort((a, b) => {
             return new Date(b.dateAdded) - new Date(a.dateAdded);
           })
           break;
-        case sortByDataDesc:
+        case sortByDateAsc:
           sortedArticles.sort((a, b) => {
             return new Date(a.dateAdded) - new Date(b.dateAdded);
           })
@@ -127,16 +129,19 @@ export default {
   },
 
   methods: {
-   async getArticles() {
+    async getArticles() {
+      // I received the article list from the local file, because I can't receive it
+      // from attached Endpoint (https://myposter.de/web-api/job-interview) - CORS blocking
+
       await axios.get('/api.json')
-          .then(resp => {
-            this.articleList = resp.data.payload.data;
-          })
-          .catch(err => {
-            console.log(err)
-          })
-          .finally(() => {
-          });
+        .then(resp => {
+          this.articleList = resp.data.payload.data;
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(() => {
+        });
     }
   }
 }
@@ -184,8 +189,6 @@ input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 input[type="checkbox"] {
   accent-color: #0D81B3;
   background-color: #EEE;
-  /*-moz-appearance: none;*/
-  /*-webkit-appearance: none;*/
   width: 20px;
   height: 20px;
 }
